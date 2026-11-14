@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAX YT Downloader</title>
+  <meta name="description" content="Paste a YouTube link and save the video as MP4 or the sound as MP3. Works with Shorts and whole playlists.">
+  <meta name="theme-color" content="#191C3A">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+    /* Opened straight from the folder? The site needs its server, so explain how to start it. */
+    if (location.protocol === 'file:') {
+      document.addEventListener('DOMContentLoaded', function () {
+        document.body.style.cssText = 'margin:0;font:18px/1.55 "Segoe UI",system-ui,sans-serif;background:#EEF1F5;color:#191C3A';
+        document.body.innerHTML = '<div style="max-width:620px;margin:14vh auto;padding:0 24px">' +
+          '<h1 style="font-size:30px;line-height:1.2;margin:0 0 16px">Start the downloader first</h1>' +
+          '<p>This website needs its small download server. Go back to the folder and double-click <b>START.bat</b>.</p>' +
+          '<p>Your browser will then open the site at <b>http://localhost:5000</b>.</p></div>';
+      });
+    }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#link">Skip to the link box</a>
+
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true">RAX</span>
+        <span class="brand-name">YT Downloader</span>
+      </a>
+      <nav class="nav" aria-label="Page">
+        <a href="#ways">Faster ways</a>
+        <a href="#questions">Questions</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap">
+        <h1 class="hero-title" id="hero-title">Paste a link.<br>Keep the video.</h1>
+
+        <form class="grab" id="grab" autocomplete="off" novalidate>
+          <label class="sr-only" for="link">YouTube link</label>
+          <div class="slab">
+            <button type="button" class="slab-paste" id="paste-btn">
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 4h6v3H9zM7 5H5v16h14V5h-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+              <span>Paste</span>
+            </button>
+            <input class="slab-input" id="link" name="link" type="url" inputmode="url"
+                   placeholder="youtube.com/watch?v=..." spellcheck="false" autocapitalize="off" enterkeyhint="go">
+            <button type="submit" class="slab-go" id="go-btn">Get video</button>
+          </div>
+          <p class="form-msg" id="form-msg" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="hero-sub">Videos up to 4K, MP3 audio, Shorts and whole playlists. Files go straight to your Downloads folder.</p>
+        <div class="notices" id="notices"></div>
+      </div>
+    </section>
+
+    <section class="result wrap" id="result" hidden></section>
+
+    <section class="ways" id="ways" aria-labelledby="ways-title">
+      <div class="wrap">
+        <h2 class="section-title" id="ways-title">Faster ways to grab a video</h2>
+        <p class="section-lede">Skip the copying and pasting. Use whichever suits the device you're on.</p>
+
+        <div class="ways-grid">
+          <article class="way">
+            <h3 class="way-title">Swap the address</h3>
+            <p>On any YouTube page, click the address bar and change <strong>youtube.com</strong> to <strong class="js-host">localhost:5000</strong>. Press Enter and the video opens here, ready to save.</p>
+            <div class="addr" aria-hidden="true">
+              <p class="addr-line is-old"><s>youtube.com</s>/watch?v=aBcD3fGh1jK</p>
+              <p class="addr-line is-new"><mark class="js-host">localhost:5000</mark>/watch?v=aBcD3fGh1jK</p>
+            </div>
+          </article>
+
+          <article class="way">
+            <h3 class="way-title">One-click button</h3>
+            <p>Drag this button onto your bookmarks bar. While a video plays on YouTube, click it and the video opens here.</p>
+            <a class="bm" id="bookmarklet" href="#" draggable="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Get with RAX
+            </a>
+            <p class="way-note">Bookmarks bar hidden? Press Ctrl+Shift+B to show it.</p>
+          </article>
+
+          <article class="way" id="phone-block">
+            <h3 class="way-title">From your phone</h3>
+            <p id="phone-lede">Connect your phone to the same Wi-Fi as this computer, then open:</p>
+            <p class="phone-url" id="phone-url">Looking up your address...</p>
+            <p class="way-note">In the YouTube app, tap Share, then Copy link, and paste it into the box.</p>
+          </article>
+        </div>
+
+        <p class="ways-extra">You can also drop a link anywhere on this page, or paste a whole list of links at once.</p>
+      </div>
+    </section>
+
+    <section class="faq" id="questions" aria-labelledby="faq-title">
+      <div class="wrap">
+        <h2 class="section-title" id="faq-title">Questions</h2>
+        <div class="faq-list">
+          <details>
+            <summary>Where do the files go?</summary>
+            <p>Into your browser's normal Downloads folder, on whichever device you used. On a phone, look in the Files or Downloads app.</p>
+          </details>
+          <details>
+            <summary>Which quality should I pick?</summary>
+            <p>1080p looks sharp on laptops and phones. 720p saves space. 4K files are large and take longer, and only some videos have them. For music, MP3 at 192 kbps is plenty.</p>
+          </details>
+          <details>
+            <summary>Can I download a whole playlist?</summary>
+            <p>Yes. Paste the playlist link, pick the quality once, untick anything you don't want and press Download. Your browser may ask whether this site can download several files. Choose Allow.</p>
+          </details>
+          <details>
+            <summary>Why won't a video download?</summary>
+            <p>Private and members-only videos can't be saved. Age-restricted videos need a cookies.txt file, which HOW TO USE.txt explains. If lots of videos suddenly fail, close the black window and run START.bat again. It updates the download engine every time, and that fixes most problems after YouTube changes something.</p>
+          </details>
+          <details>
+            <summary>Does the site work without the black window?</summary>
+            <p>No. That window is the downloader itself. Keep it open while you use the site and close it when you're done.</p>
+          </details>
+          <details>
+            <summary>Can I put this site on my web hosting?</summary>
+            <p>Not on normal PHP hosting. The site needs Python and FFmpeg running next to it, so it's built to run on your own computer and serve the phones on your Wi-Fi.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <p class="foot-name"><span class="brand-mark" aria-hidden="true">RAX</span> YT Downloader, made by Rohail Ahmed.</p>
+      <p>Download only videos you own or have permission to save.</p>
+      <p class="foot-engine" id="engine"></p>
+    </div>
+  </footer>
+
+  <aside class="tray" id="tray" aria-label="Downloads" hidden>
+    <button type="button" class="tray-head" id="tray-toggle" aria-expanded="true" aria-controls="tray-body">
+      <span class="tray-title">Downloads</span>
+      <span class="tray-count" id="tray-count"></span>
+      <svg class="tray-chevron" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="tray-body" id="tray-body">
+      <p class="tray-tip" id="tray-tip" hidden>If your browser asks to download several files, choose Allow.</p>
+      <ul class="tray-list" id="tray-list"></ul>
+      <div class="tray-foot">
+        <button type="button" class="text-btn" id="tray-clear">Clear finished</button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="drop" id="drop" hidden>
+    <p class="drop-text">Drop the link to load it</p>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="/js/app.js" defer></script>
+</body>
+</html>

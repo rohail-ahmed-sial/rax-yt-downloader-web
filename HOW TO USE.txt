@@ -1,0 +1,82 @@
+RAX YT Downloader (website)
+===========================
+
+A website that saves YouTube videos as MP4 and audio as MP3. It runs on your
+own computer, and phones on the same Wi-Fi can use it too.
+
+
+ONE-TIME SETUP
+--------------
+1. Install Python 3.10 or newer from https://www.python.org/downloads/
+   On the first screen of the installer, tick "Add python.exe to PATH".
+2. Unzip this folder (right-click the zip > Extract All).
+   Don't run it from inside the zip.
+
+
+START IT
+--------
+1. Double-click START.bat.
+   The first start takes a few minutes. It installs the download engine
+   (yt-dlp), FFmpeg (for HD video and MP3) and Deno (YouTube needs it).
+2. Your browser opens http://localhost:5000 by itself.
+3. Paste a YouTube link, pick a quality, press Download.
+4. Keep the black window open while you use the site. Close it to stop.
+
+If Windows Firewall asks about Python, click "Allow access" so your phone
+can reach the site over Wi-Fi.
+
+
+WAYS TO DOWNLOAD
+----------------
+- Paste:      copy a link, press Paste on the site (or Ctrl+V). It loads by itself.
+- Swap:       on a YouTube page, change "youtube.com" in the address bar to
+              "localhost:5000" and press Enter.
+              Example: youtube.com/watch?v=abc  ->  localhost:5000/watch?v=abc
+- One click:  on the site, drag the yellow "Get with RAX" button onto your
+              bookmarks bar. While watching any YouTube video, click it.
+- Drop:       drag a link from another tab onto the site.
+- Many links: paste a whole list of links at once and download them together.
+- Playlists:  paste a playlist link, pick the quality once, download them all.
+- Phone:      connect to the same Wi-Fi, then open the phone address shown on
+              the site and in the black window (it looks like 192.168.1.5:5000).
+
+
+WHERE FILES GO
+--------------
+Into your browser's Downloads folder, on whichever device you used.
+
+
+IF SOMETHING STOPS WORKING
+--------------------------
+- Close the black window and open START.bat again. It updates the download
+  engine every time it starts, which fixes most problems after YouTube changes
+  something.
+- Age-restricted videos need your YouTube login cookies:
+    1. In Chrome, install the "Get cookies.txt LOCALLY" extension.
+    2. Open youtube.com while signed in, click the extension, export.
+    3. Rename the file to cookies.txt and put it in this folder.
+    4. Restart START.bat.
+  Treat cookies.txt like a password: it can sign in to your account.
+  Never share it.
+- If port 5000 is busy, the downloader uses 5001, 5002 and so on. The black
+  window shows the address it picked.
+
+
+SETTINGS
+--------
+Open server.py in Notepad. The settings are at the top:
+  PORT                    the address port, 5000 by default
+  ALLOW_PHONES_ON_WIFI    True lets phones on your Wi-Fi use the site
+  MAX_PARALLEL_DOWNLOADS  how many videos download at the same time
+  KEEP_FILES_MINUTES      how long finished files wait before cleanup
+
+
+PUTTING IT ONLINE
+-----------------
+Normal web hosting (PHP hosting) can't run this site, because it needs Python
+and FFmpeg running next to it. It's built to run on your own computer.
+
+
+PLEASE NOTE
+-----------
+Download only videos you own or have permission to save.
